@@ -27,15 +27,17 @@ class   Student
     public: 
     Student()
     {
-        cout<<"这个是构造函数！!!"<<endl;
+        cout<<"这个是构造函数 1"<<endl;
     }
     Student(string name, int age)
     {
+        cout<<"这个是构造函数 2"<<endl;
         this->M_name = name;
         this->M_age = age;
     }
     Student(string name, int age, int book_number)
     {   
+        cout<<"这个是构造函数 3"<<endl;
         BookNode *tail = head;
         for(int i =0;i<book_number;i++)
         {   
@@ -81,6 +83,7 @@ class   Student
 
     ~Student()
     {
+        std::cout << "这个是析构函数" << std::endl;
         BookNode *current = head;
         while (current != nullptr)
         {
@@ -94,7 +97,7 @@ class   Student
         return head;
     }
     private:
-    BookNode* head = nullptr;
+    BookNode* head = nullptr; //32bits
     string M_name;
     int M_age;
     int M_score;
@@ -103,15 +106,18 @@ class   Student
 
  int main()
  {
-    Student student_1;
-    Student student_2("xiaoxuyang",18);
-    Student student_3("david",200,5);
-    student_3.borrow_book(3,1000);
-    student_3.print_array();
-    BookNode * result = student_3.check_head_1();
+     BookNode *result;
+     {
+         Student student_1;
+         Student student_2("xiaoxuyang", 18);
+         Student student_3("david", 200, 5);
+         student_3.borrow_book(3, 1000);
+         student_3.print_array();
+         result = student_3.check_head_1();
+         cout << result->id << endl;
+         cout << "result:" << result << std::endl;
+    }
+    
     cout << "result:" << result << std::endl;
-    cout << result->id << endl;
-    BookNode * result_1 = student_3.check_head_2();
-    cout << "result_1:" << result_1 << std::endl;
-    cout<<result_1->id<<endl;
+    cout<<result->id<<endl;
  }
