@@ -1,14 +1,16 @@
 #include <iostream>
 #include <vector>
 
+
+
 class Coordinate {
 protected: //Access specifier sections
     int x;
     int y;
 public:
-    Coordinate(){
-        std::cout << "default constructor!" << std::endl;
-    }
+    // Coordinate(){
+    //     std::cout << "default constructor!" << std::endl;
+    // }
     Coordinate(int xIn, int yIn) : x(xIn), y(yIn) { //Initialisation syntax constructor
     }
     Coordinate operator+(Coordinate other) {
@@ -35,12 +37,19 @@ protected:
     Coordinate start;
     Coordinate end;
 public:
-    // Journey(Coordinate startIn, Coordinate endIn) {
-    //     std::cout << "in the Journey constructor!" << std::endl;
-    //     start = startIn;
-    //     end = endIn;
-    // }
+    // 1.复制一遍我们的 startIn，endIn：调用我们的copy constructor
+    Journey(Coordinate startIn, Coordinate endIn) {
+    //2. 初始化我们的 start，end：调用我们的默认构造函数 ：default constructor
+        std::cout << "in the Journey constructor!" << std::endl;
+    //3. 调用 = 将 start和end赋值
+        start = startIn;
+        end = endIn;
+    }
+    
+    //1.复制一遍我们的 startIn，endIn：调用我们的copy constructor
+    //2.直接执行拷贝构造函数，start， end
     Journey(Coordinate startIn, Coordinate endIn): start(startIn), end(endIn) {
+
     }
 };
 void test(Coordinate a){
@@ -50,18 +59,18 @@ int main(){
     //default constructor : no parameters
     //constructor defined by ourself
 
-
-    
+    std::vector<int> coords1(2);
+    std::vector<Coordinate> coords(2);
     Coordinate a(4,-3);
     Coordinate b(2,3);
-    b = a;
-    test(b);
-    b.test2();
+    // b = a;
+    // test(b);
+    // b.test2();
     // if(a <b){
     //     std::cout << "????????" << std::endl;
     // }
     // std::cout << "------" << std::endl;
-    // Journey jounrney_1(a, b);
+    Journey journey_1(a, b);
     // if(a==b){
     //     std::cout << "a==b!" << std::endl;
     // }
