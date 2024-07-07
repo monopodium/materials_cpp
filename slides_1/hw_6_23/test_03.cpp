@@ -80,7 +80,7 @@ public:
     void Print(){
         std::cout << start.x << std::endl;
     }
-    const Coordinate &getStart(){
+    Coordinate& getStart(){
         return start;
     }
 
@@ -107,9 +107,7 @@ int main(){
     std::cout <<"It is:"<< j_1<<" "<< j_1  << std::endl;
     
     std::cout << "flag!" << std::endl;
-    const Coordinate& c = j_1.getStart();
-    std::cout << "c.x:" << c.x << std::endl;
-    j_1.Print();
+    b = j_1.getStart();
     // std::cout << a << std::endl;
     //  string a;
 

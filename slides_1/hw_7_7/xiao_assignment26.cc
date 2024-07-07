@@ -36,19 +36,9 @@ class Matrix
     }
     vector<int> & operator[](int index)
     {
-        //std::cout << "non const constrain!" << std::endl;
         return data[index];
     }
-    const vector<int> operator[](int index) const 
-    {
-        //std::cout << "const constrain!" << std::endl;
-        return data[index];
-    }
-    const vector<int> test(int index) const //禁止这个函数里面修改matrix类里面的成员变量
-    {
-        std::cout << "const constrain!" << std::endl;
-        return data[index];
-    }
+
     Matrix operator +(Matrix &other)
     {
         cout<<"使用了加号的符号重载！！"<<endl;
@@ -63,49 +53,30 @@ class Matrix
         }
     return result;
     }
-    //A *B 
-    //A这个类的data B就是other
-
-    //A = n*m  *   B = m*x
-    // n *x
-    //
     Matrix operator  *(Matrix &other)
     {
         cout<<"使用了乘法的符号重载！！"<<endl;
 
-
-        Matrix result(M_row,other.M_column);
+        Matrix result(M_row,M_column);
         for (int i = 0; i < M_row; i++)
         {
-            for (int j = 0; j < other.M_column; j++)
-            {    
-                for(int k =0; k<M_column;k++)
-                {
-                    result[i][j] += data[i][k] * other[k][j];
-                }
+       for (int j = 0; j < M_column; j++)
+       {    
+            for(int k =0; k<M_column;k++)
+            {
+            result[i][j] += data[i][k] * other[k][j];
             }
         }
-        return result;
+
+    }
+    return result;
     }
     friend void Print_matrix(Matrix result);        //友元函数
-    ostream & operator<<(ostream & out)
-    {
-        std::cout << "重载了运算符<<" << std::endl;
-        for (int i = 0; i <  result.M_row; i++)
-        {
-        for (int j = 0; j < result.M_column; j++)
-        {
-            cout<<result[i][j]<<" ";
-        }
-        cout<<endl;
-        }
-    cout<<endl;
-    }
-    return out;
+    friend ostream& operator<<(ostream &out, const Matrix &matrix);
+
 
 };
-//const 
-void Print_matrix(const Matrix result)
+void Print_matrix(Matrix result)
 {
         for (int i = 0; i <  result.M_row; i++)
         {
@@ -117,15 +88,29 @@ void Print_matrix(const Matrix result)
         }
     cout<<endl;
 }
+ostream& operator<<(ostream &out, const Matrix &matrix)
+{
+        for (int i = 0; i < matrix.M_row; i++)
+        {
+            for (int j = 0; j < matrix.M_column; j++)
+            {
+                out << matrix.data[i][j] << " ";
+            }
+            out << endl;
+        }
+        return out;
+}
 
 int main()
-{
+{   
     Matrix m_1(2,2);
     m_1[0][0] = 4;
     m_1[0][1] = 3;
     m_1[1][0] = 2;
     m_1[1][1] = 1;
 
+    const Matrix a_1 = m_1;
+    //std::cout << "a_1" << a_1[0][0] << std::endl;
 
     Matrix m_2(2,2);
     m_2[0][0] = 4;
@@ -135,23 +120,15 @@ int main()
 
     Matrix result(2,2);
     result = m_1 + m_2;
-    Print_matrix(result);
+    // Print_matrix(result);
 
-    Matrix result_2(2, 2);
+    cout<<"result:"<<endl;
+    cout<<result<<endl;
+
+    Matrix result_2(2,2);
     result_2 = m_1 * m_2;
-    Print_matrix(result_2);
+    // Print_matrix(result_2);
 
-    Matrix m_3(2,1);
-    Matrix m_4(1,2*2);
-    m_3[0][0] = 4;
-    m_3[1][0] = 3;
-    m_4[0][0] = 4;
-    m_4[0][1] = 3;
-    Matrix result_3(2,2*2);
-    result_3 = m_3 * m_4;
-    Print_matrix(result_3);
-    //<<重载
-    //cout << m_3 << std::endl;
 
     return 0;
 }

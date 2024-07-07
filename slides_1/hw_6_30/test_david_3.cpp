@@ -14,43 +14,59 @@ int m, n;    //定义全局变量
 // 
 
 //
-
+//
 
 
 class matrix
 {
+//
 private:
-    vector<vector<int> > a;
+    vector<vector<int> > matrix_vector;
 
 public:
+    void write(){
+
+    }
     matrix(int n, int m);
     void Enterin(int n,int m);
-    void Printout()const;
+    void Printout() const;
     int get_row() const {
-        return a.size();
+        return matrix_vector.size();
+    }
+    int return_a() const {
+        return 0;
     }
     int get_column()const;
     friend matrix operator*( matrix &A,  matrix &B);
     friend matrix operator+(const matrix &D, const matrix &E);
-    friend ostream &operator<<( ostream &out, matrix &D );
-    vector<int> operator[](int i)
-     { 
-        return a[i];
-     }
-      
-};
+    ostream &operator<<(ostream &out,const matrix &D );
+    vector<int>& operator[](int i) 
+    { 
+        return matrix_vector[i]; 
+    }
+    // vector<int> operator[](int i) const
+    // { 
+    //     return matrix_vector[i]; 
+    // }
 
+    const vector<int>& operator[](int i) const
+    { 
+        return matrix_vector[i]; 
+    }
+     // matrix A
+     //  A[0][0] = 14;
+};
 
 int matrix::get_column()const
 {
-    return a[0].size();
+    return matrix_vector[0].size();
 }
 
 
 
 matrix::matrix(int n, int m)
 {
-    a.resize(n, vector<int>(m));
+    matrix_vector.resize(n, vector<int>(m));
 }
 
 matrix operator*( matrix &A,  matrix &B)
@@ -64,9 +80,9 @@ matrix operator*( matrix &A,  matrix &B)
     matrix C(A.get_row(), B.get_column());
     for (int i = 0; i < A.get_row(); ++i) {
         for (int j = 0; j < B.get_column(); ++j) {
-            C.a[i][j] = 0;
+            C.matrix_vector[i][j] = 0;
             for (int k = 0; k < A.get_column(); ++k) {
-                C.a[i][j] += A.a[i][k] * B.a[k][j];
+                C.matrix_vector[i][j] += A.matrix_vector[i][k] * B.matrix_vector[k][j];
             }
         }
     }
@@ -83,25 +99,16 @@ matrix operator+( const matrix &D, const matrix &E)
     matrix F(D.get_row(), D.get_column());
     for (int i = 0; i < D.get_row(); ++i) {
         for (int j = 0; j < D.get_column(); ++j) {
-            F.a[i][j] = D.a[i][j] + E.a[i][j];
+            F.matrix_vector[i][j] = D.matrix_vector[i][j] + E.matrix_vector[i][j];
         }
     }
 
     return F;
 }
 //
-ostream &operator<<( ostream &out, matrix &D ){
-    {
-        std::cout << "重载了运算符<<" << std::endl;
-        for (int i = 0; i < D.get_row(); i++)
-        {
-            for(int j=0;j<D.get_column();j++){
-                 out << D.a[i][j] << " ";
-            }
-            out<<endl;
-        }
-      }
-      return out;
+ostream &operator<<(ostream &out, const  matrix &D ){
+    D.write(out);// 把D的行和列都丢到out(输出流)中
+    return out;
 }
 
 
@@ -113,8 +120,8 @@ void matrix::Enterin(int n,int m)
     {
         for (int j = 0; j < m; j++)
         {
-            a[i][j] = 3;
-            //cin >> a[i][j];
+            matrix_vector[i][j] = 3;
+            //cin >> matrix_vector[i][j];
         }
         //cout<<"换行"<<endl;
     }
@@ -123,7 +130,7 @@ void matrix::Enterin(int n,int m)
 void matrix::Printout()const{
    for(int i=0;i<get_row();i++){
         for(int j=0;j<get_column();j++){
-            cout << a[i][j] << " ";
+            cout << matrix_vector[i][j] << " ";
         }
         cout<<endl;
     }
@@ -139,8 +146,11 @@ int main()
     // cin>>m;
     n = 2;
     m = 3;
-
+    //literally:改名字，逻辑一样，位置一样，是躲不过查重的
+    //
     matrix A(n, m);
+    ///？？
+    //？？？
     matrix B(m, n*n);
     matrix C(n, n*n);
     A.Enterin(n,m);
@@ -166,7 +176,9 @@ int main()
     //我不希望在Printout对我的class里面的变量做任何的修改 const的位置加在哪里？
     //
     F.Printout();
-
+    const matrix matrix_const = A;
+    std::cout << matrix_const[0][0] << std::endl;
+    matrix_const.return_a();
 
     return 0;
 }
