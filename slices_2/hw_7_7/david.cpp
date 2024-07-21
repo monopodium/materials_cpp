@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // 作业：用c++实现stack和queue
@@ -52,15 +53,17 @@ int main(){
     cout<<"pointer_stack_int:"<<pointer_stack_int<<endl;  //
     cout<<"pointer_stack_int:"<<pointer_stack_2_int<<endl; //大
 
-//  string c=a;
- 
+    std::vector<int> a(10);
+    std::vector<int>::iterator it = a.begin();
 
-//  string f=*b;
-//  string*g=b;
-//  string *h=&a;
-//  cout<<a<<endl;
-//  cout<<b<<endl;
-//  cout<<&a<<endl;
-//  cout<<&b<<endl;
+    //  string c=a;
+
+    //  string f=*b;
+    //  string*g=b;
+    //  string *h=&a;
+    //  cout<<a<<endl;
+    //  cout<<b<<endl;
+    //  cout<<&a<<endl;
+    //  cout<<&b<<endl;
     return 0;
 }
