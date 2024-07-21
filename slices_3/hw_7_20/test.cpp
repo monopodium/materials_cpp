@@ -23,16 +23,17 @@
 //输入是一个乱序的vector<int>数组
 
 //验证两种constructor的不同：
-//第一种：
-// IHazStringPtr(const IHazStringPtr & other): str(other.str)
-// { 
-
-// }
-// //第二种：
-// IHazStringPtr(const IHazStringPtr & other)
-// { 
-//     str = other.str2
-// }
+    // Person(const Person & other):M_name(other.M_name),M_age(other.M_age)
+    // {
+    //     std::cout << "copy construtor of Person!" << std::endl;
+    // }
+    // Person(const Person & other,int n)
+    // {   
+    //    this->M_age = M_age;
+    //     this->M_name = M_name;  //operator=
+    //     std::cout << "copy construtor_2 of Person!" << std::endl;
+    // }
+    // P
 
 //generic programming :泛型编程
 // []
