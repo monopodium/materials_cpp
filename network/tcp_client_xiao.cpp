@@ -35,19 +35,34 @@ int main() {
         return -1;
     }
 
-    while(true){
-        send(sock, hello, strlen(hello), 0);
+    std::cout << "请输入想发给server的消息:,以#结束程序" << std::endl;
+    while (true)
+    {
+        std::string input_from_user;
+        std::cin >> input_from_user;
+        if(input_from_user=="#"){
+            break;
+        }
+        send(sock, input_from_user.c_str(), input_from_user.size(), 0);
+        valread = read(sock, buffer, 1024);
+        std::cout << "Message from server: " << buffer << std::endl;
     }
-    // 发送数据到服务器
-    
-    std::cout << "Hello xiao !" << std::endl;
 
-    // 读取服务器响应的数据
-    valread = read(sock, buffer, 1024);
-    std::cout << "Message from server: " << buffer << std::endl;
-
-    // 关闭 socket
     close(sock);
+    close(sock);
+        // while (true)
+        // {
+        //     // 发送数据到服务器
+        //     send(sock, hello, strlen(hello), 0);
+        //     std::cout << "Hello xiao !" << std::endl;
+
+        //     // 读取服务器响应的数据
+        //     valread = read(sock, buffer, 1024);
+        //     std::cout << "Message from server: " << buffer << std::endl;
+
+        //     // 关闭 socket
+        //     close(sock);
+        // }
 
     return 0;
 }

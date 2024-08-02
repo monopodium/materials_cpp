@@ -4,7 +4,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
-
+//全栈
 #define PORT 8081
 //client端的功能:从我们的命令行里面不断user读取消息，发送给server
 //server：不断的去接收client的消息，存到文件里面。
