@@ -52,7 +52,7 @@ public:
     }
 };
 
-
+// int[] data = {1,2,3,4,5};
 // 类似于vector, 但只能存int类型的数据
 class IntegerContainer {
 private:
@@ -75,6 +75,12 @@ public:
     david_xxy begin() const {
         std::cout << "invoke begin!" << std::endl;
         //return david_xxy(data);
+        // 返回的是一个object,他的类型是david_xxy
+        david_xxy temp = david_xxy(data);
+        temp + 1;
+        temp[1];
+        *temp;
+        //
         return david_xxy(data);
     }
 
@@ -87,6 +93,7 @@ public:
 };
 
 int main() {
+
     //
     int *ptr ;
     int a = 1;

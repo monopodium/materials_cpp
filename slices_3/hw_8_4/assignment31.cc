@@ -27,86 +27,101 @@ void sort_vector(vector<int>& vec)
         }
     }
 }
-void list_sort(list<int>& lst)
-{
-    lst.sort();
-}
-//template
-template<typename T>
-class Node
-{
-    private:
-    T data;
-    Node *next;
-};
-template<typename T>
-class my_list
-{
-    private:
-    Node<T> *head;
-    Node<T> *tail;
+//my_list的重载 
 
-    public:
-    class iterator
-    {
-        private:
-        Node<T> *ptr;
-        public:
-        Iterator(Node<T> p)
-        {
-            Node<T> node = p;
-        }
+// template<typename T>
+// class Node
+// {
+//     private:
+//     T data;
+//     Node *next;
+// };
+// template<typename T>
+// class my_list
+// {
+//     private:
+//     Node<T> *head;
+//     Node<T> *tail;
+//     my_list()
+//     {
+//         Node * temp = head;
+//         head = head->next;
+//     }
+
+//     public:
+//     class iterator
+//     {
+//         private:
+//         Node<T> *ptr;
+//         public:
+//         iterator(Node<T> p)
+//         {
+//             Node<T> node = p;
+//         }
         
-        T& operator*() const
-        {
-            return node->data;
-        }
-        iterator& operator++()
-        {
-            this->node = node->next;
-            return *this;
-        }
-        bool operator!=(const iterator& other)
-        {
-            return node !=  other.node;
-        }
-    };
-    iterator begin() const
-    {
-        cout<<"重载了begin()函数！！"<<endl;
-        return iterator(head);
-    }
+//         T& operator*() const
+//         {
+//             return node->data;
+//         }
+//         iterator& operator++()
+//         {
+//             this->node = node->next;
+//             return *this;
+//         }
+//         bool operator!=(const iterator& other)
+//         {
+//             return node !=  other.node;
+//         }
+//     };
+//     iterator begin() const
+//     {
+//         cout<<"重载了begin()函数！！"<<endl;
+//         return iterator(head);
+//     }
 
-    iterator end() const
-    {
-        cout<<"重载了end()函数！！"<<endl;
-        return iterator(tail);
-    }
+//     iterator end() const
+//     {
+//         cout<<"重载了end()函数！！"<<endl;
+//         return iterator(tail);
+//     }
 
-    void sort()
-    {
-        
-    }
-};
+// };
+
+//my_vector
 template<class T>
 class my_vector
-{
+{   
     private:
-        T *data; //push的时候，要去检查size的大小，
-        //要是不满足条件了，就重新new一个数组
+        T *data; //push的时候要去检查size的大小，
+                    //要是不满足条件，就重新new一个
         int size = 0;
     public:
-        int& operator[]{
 
+        T& operator[](int index)    //重载【】符号，让其能访问数组的元素
+        {
+            return data[index];
         }
-        my_vector(int max_size)
+        my_vector(int max_size)     //
         {
             data = new T[max_size];
         }
-        void push_back(T input){
-            //要是不满足条件了，就重新new一个数组,把旧值拷贝过来
-            data[size] = input;
+
+        void push_back(const T& value)
+        {
+            //要不满足条件了，就重新new一个数组，把旧值重新拷贝过来
+            data[size] = value;
             size++;
+        }
+        my_vector& operator+(const my_vector& other) 
+        {
+                int new_size = size +other.size;
+                my_vector new_result(new_size);
+                for(int i =0;i<other.size;i++)
+                {
+                    new_result.push_back(other.data[i]);
+                }
+                return new_result;
+
         }
         class iterator 
         {
@@ -115,7 +130,11 @@ class my_vector
             public:
                 iterator(T* p) : ptr(p) {}
 
-                iterator& operator++() {
+                // iterator& operator ++() {
+                //     ++ptr;
+                //     return *this;
+                // }
+                iterator& operator ++(int) {
                     ++ptr;
                     return *this;
                 }
@@ -143,11 +162,22 @@ class my_vector
 
 int main()
 {
-    vector<int> vec_1{11,3,44,25,19,8,10};
-    sort_vector(vec_1);
+    my_vector<int> vec_1(10);
 
-    my_list<int> list_1{5,12,30,56,7,20,1};
-    list_sort(list_1);
+    int value = 0;
+    for (int i = 0; i < 10; ++i) {
+        vec_1.push_back(i);
+    }
+
+    for (auto it = vec_1.begin(); it != vec_1.end(); it++) {
+        std::cout << *it << " ";
+    }
+    cout<<endl;
+
+
+
+    // my_list<int> list_1{5,12,30,56,7,20,1};
+    // list_sort(list_1);
 
 
 
