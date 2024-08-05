@@ -70,9 +70,9 @@ void merge_2(vector<int>::iterator left, vector<int>::iterator right,vector<int>
 void MergeSort(vector<int>::iterator left, vector<int>::iterator right){
     std::cout<<"MergeSort "<<*left<<"  "<<*right<<std::endl;
     // std::cout<<"MergeSort v "<<v[left]<<"  "<<v[right]<<std::endl;
-    if(left >= right){
-        return;
-    }
+    // if(left >= right){
+    //     return;
+    // }
     int size = 0;
     for (vector<int>::iterator it = left; it <= right; it++)
     {
