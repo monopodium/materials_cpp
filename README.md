@@ -1,3 +1,9 @@
+git add . 
+git commit -m "test"
+git push origin xxy_dev
+
+
+
 curl 'https://leetcode.com/graphql' \
   -H 'authority: leetcode.com' \
   -H 'accept: */*' \
