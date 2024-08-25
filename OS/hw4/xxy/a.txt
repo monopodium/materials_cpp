@@ -1,0 +1,19 @@
+当前访问的page_number是：7
+当前的Frames是:[-1,-1,-1]
+7 在/不在 Frames里面
+访问 7 之后的Frames是:[7,-1,-1]
+
+当前访问的page_number是：0
+当前的Frames是:[7,-1,-1]
+0 在/不在 Frames里面
+访问 0 之后的Frames是:[7,0,-1]
+
+当前访问的page_number是：1
+当前的Frames是:[7,0,-1]
+1 在/不在 Frames里面
+访问 1 之后的Frames是:[7,0,1]
+
+当前访问的page_number是：2
+当前的Frames是:[7,0,1]
+2 在/不在 Frames里面
+访问 2 之后的Frames是:[2,0,1]
