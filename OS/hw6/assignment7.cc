@@ -8,15 +8,22 @@ using namespace std;
 
 int main()
 {   
+
+    //1. 从输入里面读取了指令： 被正确的读取了 ？
+    // 
     int status;
     string command;
     cout<<"请输入你要执行的命令"<<endl;
     getline(std::cin, command);  
 
+    cout<<"command:"<<command<<endl;
+
     pid_t pid = fork();
     if(pid== 0)
     {
-        execl(command,command,NULL);
+        cout<<"子进程被运行了！！！！"<<endl;
+        int result = execl("/bin/ls","/bin/ls","-l",NULL);
+        std::cout<<"result:"<<result<<std::endl;
         exit(127);
 
     }
