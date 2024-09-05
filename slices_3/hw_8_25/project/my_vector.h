@@ -92,8 +92,15 @@ class my_vector<T>::iterator {
         return *this;
     }
 
+    int operator-(const iterator& other) const {
+        return ptr_ - other.ptr_;
+    }
+    iterator& operator+(int other) const {
+        ptr_ += other;
+        return *this;
+    }
     // 重载后置增量操作符
-    iterator operator++(T) {
+    iterator& operator++(T) {
         iterator tmp = *this;
         ++(*this);
         return tmp;

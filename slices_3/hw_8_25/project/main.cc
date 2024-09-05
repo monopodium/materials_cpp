@@ -98,5 +98,21 @@ int main()
     test_my_list();
     test_my_vec();
     test_my_car();
+    my_vector<int> vec;
+
+    vec.push_back(9);
+    vec.push_back(5);
+    vec.push_back(6);
+    vec.push_back(16);
+    vec.push_back(1);
+    vec.push_back(3);
+    vec.push_back(7);
+    vec.push_back(8);
+    vec.push_back(2);
+    int a,b = 0;
+    int *p = &a;
+    int *q = &b;
+    std::cout << *p << " " << *q <<" "<<int(p-q)<< std::endl;
+
     return 0;
 }

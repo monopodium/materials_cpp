@@ -3,6 +3,7 @@
 #include<queue>
 #include<algorithm>
 using namespace std;
+//
 //1.作业三的完善：
 //a.双向循环链表（bidirectional circular linked list) insert和remove函数补全
 //b.不用双向循环链表，用vector实现加index%实现一遍second chance algorithm.
@@ -21,6 +22,7 @@ class SecondChance {
 private:
     vector<int> frames;      // 存储页面的frame
     vector<int> refBits;     // 存储页面的引用位
+    queue<int> queue_page;
     // int size;            // 内存的大小
     int pointer;             // 当前指针位置，用于指向要置换的页面
     int page_faults;
@@ -75,9 +77,12 @@ public:
                 }
 
             }
+            
             // 尝试实现FIFO算法
-            int index_to_victim = 0; 
-            frames[index_to_victim] = page_number; 
+            int index_to_victim = 0; // FIFO算法的实现
+            // frames[index_to_victim] = page_number;
+            queue_page[index_to_victim]   = page_number;
+            
         }
         //  
     }
