@@ -1,7 +1,16 @@
 #include<iostream>
+#include<memory>
+#include<vector>
 //Inherit
 //Inheritance
 
+// 作业：把person变成abstract class
+//  teacher都继承自person
+//  president继承自teacher, president去override print_details
+//  teacher is a person, president is a teacher
+// class-oriented
+//  multimorphic : 多态
+// 前序 遍历一个tree
 
 //定义一个base class : 叫做persion,
 //有成员变量：private： 姓名，年龄，身份证号，
@@ -34,31 +43,34 @@
 
 // base class : 基类
 class Coordinate {
-private:   // 不能被public派生类访问, 也不能被外部访问
-    int x;
-    int y;
+// private:   // 不能被public派生类访问, 也不能被外部访问
+//     int x;
+//     int y;
 
-protected: // 可以被public派生类访问，但是不能被外部访问
-    int z;
-// constructor :自己定义的
+// protected: // 可以被public派生类访问，但是不能被外部访问
+//     int z;
+// // constructor :自己定义的
 // copy constructor : 编译器自动生成的
 public:
+    int x;
+    int y;
+    int z;
     Coordinate(int xIn, int yIn) : x(xIn), y(yIn) {}
-    void printDetails() {
+    virtual void printDetails() {
         std::cout << "Coordinate: ";
         std::cout << x << "," << y<<std::endl;
     }
-    void test(int xIn) {
-        std::cout << "test" << std::endl;
-    }
+    // virtual void test() = 0;
 };
+//multimorphic
 // derived class : 派生类 
 //public 原本基类里面private的变量，派生类里面是不能直接访问的，但是可以通过基类的public function来访问
 // 
 class Bikes : public Coordinate {
-private:
-    int howMany;  
+// private:
+//     int howMany;  
 public:
+    int howMany;  
 //先去调用base class的constructor, 也就是Coordinate的constructor
 //然后再调用Bikes的constructor
     Bikes(const int xIn, const int yIn, //member initializer list syntax
@@ -69,19 +81,24 @@ public:
     Bikes(const int howManyIn, const Coordinate & c)
         : Coordinate(c),
           howMany(howManyIn) {
-
     };
 
-    void printDetails() { //子类里面调用父类的函数， 通过::来调用
+    virtual void printDetails() override { //子类里面调用父类的函数， 通过::来调用
         std::cout << "Bikes: ";
         Coordinate::printDetails();
         std::cout << " " << howMany<<std::endl;
     }
-    void test() {
-        std::cout<<z<<std::endl;
-        std::cout << "bike test" << std::endl;
+    virtual ~Bikes() {
+        std::cout << "Bikes destructor" << std::endl;
     }
+    // virtual void test() override {
+    //     std::cout << "Bikes test" << std::endl;
+    // }
 };
+void someFunction(Coordinate & c) {
+    c.printDetails();
+    std::cout << std::endl;
+}
 // public继承，derived class可以访问base class的public成员
 // is-a relationship
 // public继承，derived class要访问base class的private变量，需要通过base class的public function
@@ -96,18 +113,51 @@ public:
 //virtual function: base class中的function可以被derived class override
 
 int main() {
+    double d = 3.14;
+
+    //普通指针：
+    //Coordinate * c = new Bikes(3,4,5);
+    // std::vector<Coordinate> test;
+    // Coordinate c1(1, 2);
+    // test.push_back(c1);
+    // test.emplace_back(3, 4);
+
+    // std::vector<std::unique_ptr<Coordinate>> v;
+    // Coordinate c(1, 2);
+    // v.push_back(std::make_unique<Coordinate>(&c));
+    // Bikes b(1, 2, 3);
+    // v.emplace_back(&b);
+
+    // for(auto & c : v)
+    // {
+    //     (*c).printDetails();
+    // }
+    // 3*4 + 5 = 17
+    // -> . & *  !
+    // * / + -
+    // 3*4 + 5
     Coordinate c(3,4);
-    c.printDetails();
+    //c.printDetails();
+    //
+    // 32 
+    //
+    std::cout<<"size of Coordinate:"<< sizeof(c)<<std::endl;
+    std::cout<<"address of c:    "<< &c<<std::endl;
+    std::cout<<"address of c.x:  "<< &c.x<<std::endl;
+    std::cout<<"address of c,y:  "<< &c.y<<std::endl;
+    std::cout<<"address of c,z:  "<< &c.z<<std::endl;
 
     Bikes b(3,4,5);
-    std::cout << "----------------" << std::endl;
-    b.printDetails();
-
-    //c = b;
-    //b = c;
-    // b.test();
-    // b.Coordinate::test(3);
-    // Coordinate * cPtr = &b;
-    // cPtr->printDetails();
-    // cPtr->test(3);
+    // std::cout << "----------------" << std::endl;
+    // //b.printDetails();
+    someFunction(b);
+    // Coordinate* cc = new Bikes(3,4,5);
+    // std::unique_ptr<Coordinate> cc(new Bikes(3,4,1));
+    // c = b;
+    // b = c;
+    //  b.test();
+    //  b.Coordinate::test(3);
+    //  Coordinate * cPtr = &b;
+    //  cPtr->printDetails();
+    //  cPtr->test(3);
 }
