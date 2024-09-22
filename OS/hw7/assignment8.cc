@@ -12,12 +12,15 @@ std::mutex mtx;
 
 // merge sort 
 
-// n*n 
+// 1. 用多个线程计算矩阵所有值的和，每个线程计算一行
 // [1,2,3,4,5,5]  // 
 // [5,2,3,4,5,5]
 // [9,2,3,4,5,5]
 // [7,2,3,4,5,5]
 
+// 2. 重载operator,把find函数用到正确的位置上
+
+// 3. find_old_frame的函数的实现：找到最旧的frame，time最大的frame的下标返回
 int globalVar = 0;
 int globalSum = 0;
 std::vector<int> to_sum = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1};
